@@ -19,8 +19,9 @@ else
     if [ "$CONFIGURATION" = "Release" ]; then
         VERSION_MINOR=$((VERSION_MINOR + 1))
     fi
-    echo "[*] will update version to $VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH"
-    echo "$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH" > $VERSION_FILE
+    NEW_VERSION="$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH"
+    echo "[*] will update version to $NEW_VERSION"
+    sed -i '' "s/MARKETING_VERSION = $VERSION/MARKETING_VERSION = $NEW_VERSION/g" "$VERSION_FILE"
 fi
 
 if [ -n "$CODESIGNING_FOLDER_PATH" ]; then
